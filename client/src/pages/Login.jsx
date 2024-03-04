@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
 import Input from '../components/Input';
 import { z } from 'zod';
@@ -7,22 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
   email: z.string().min(1, 'Cant be empty').email(),
-  password: z.string().min(1, 'Cant be empty').min(5),
+  password: z.string().min(1, 'Cant be empty').min(5, 'Too small'),
 });
-
-// export async function loginAction({ request }) {
-//   const formData = await request.formData();
-//   const email = formData.get('email');
-//   const password = formData.get('password');
-//   console.log({ email, password });
-//   return null;
-// }
 
 export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -30,17 +22,14 @@ export default function Login() {
       password: '',
     },
   });
-
-  const onSubmit = async (data) => {
-    console.log(data);
-  };
+  const { state } = useNavigation();
 
   const body = (
     <>
       <Input
         label="email"
-        type="email"
-        disabled={isSubmitting}
+        type="text"
+        disabled={state === 'submitting'}
         register={register}
         error={errors.email}
         placeholder="Email address"
@@ -50,7 +39,7 @@ export default function Login() {
       <Input
         label="password"
         type="password"
-        disabled={isSubmitting}
+        disabled={state === 'submitting'}
         error={errors.password}
         placeholder="Password"
         register={register}
@@ -62,7 +51,10 @@ export default function Login() {
   const footer = (
     <>
       Don&apos;t have an account?{' '}
-      <Link to="/signup" className="ml-2 text-accent">
+      <Link
+        to="/signup"
+        className="ml-2 pb-1 text-accent border-b-[1px] border-transparent hover:border-accent focus-visible:border-accent transition"
+      >
         Sign Up
       </Link>
     </>
@@ -74,8 +66,7 @@ export default function Login() {
       body={body}
       buttonLabel="Login to your account"
       footer={footer}
-      // action={loginAction}
-      onSubmit={handleSubmit(onSubmit)}
+      handleSubmit={handleSubmit}
     />
   );
 }
