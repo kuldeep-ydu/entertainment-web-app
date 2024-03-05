@@ -69,8 +69,11 @@ export default function Signup() {
   const footer = (
     <>
       Already have an account?{' '}
-      <Link to="/" className="ml-2 text-accent">
-        Signup
+      <Link
+        to="/"
+        className="ml-2 pb-1 text-accent border-b-[1px] border-transparent hover:border-accent focus-visible:border-accent transition"
+      >
+        Login
       </Link>
     </>
   );
