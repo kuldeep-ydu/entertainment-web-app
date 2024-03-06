@@ -3,7 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.nav-height {
-  height: calc(100vh - 4rem);
-}

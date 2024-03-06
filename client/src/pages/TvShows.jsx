@@ -1,3 +1,5 @@
+import MediaSection from '../components/MediaSection';
+
 export default function TvShows() {
-  return <div>TvShows</div>;
+  return <MediaSection title="TV Shows" />;
 }

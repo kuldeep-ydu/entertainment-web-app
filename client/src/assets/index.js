@@ -1,4 +1,3 @@
-import IconBookmarkEmpty from './icon-bookmark-empty.svg?react';
 import IconBookmarkFull from './icon-bookmark-full.svg?react';
 import IconCategoryTv from './icon-category-tv.svg?react';
 import IconCategoryMovie from './icon-category-movie.svg?react';
@@ -12,7 +11,6 @@ import Logo from './logo.svg';
 import ImageAvatar from './image-avatar.png';
 
 export {
-  IconBookmarkEmpty,
   IconBookmarkFull,
   IconCategoryTv,
   IconCategoryMovie,

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   IconNavBookmark,
   IconNavHome,
@@ -10,36 +10,54 @@ import {
 
 export default function Navbar() {
   return (
-    <nav className="flex flex-col items-center py-8 px-6 bg-secondary-dark rounded-3xl sticky inset-y-8 nav-height">
+    <nav className="flex flex-col items-center py-8 px-6 bg-secondary-dark rounded-3xl md:h-[90vh] sticky top-[5vh]">
       <img src={Logo} alt="Entertainment Logo" height="32" width="32" />
 
       <ul className="grid justify-items-center gap-6 mt-16">
         <li>
-          <Link to="." className="p-2 block hover:opacity-50 transition">
+          <NavLink
+            to="."
+            end
+            className={({ isActive }) =>
+              `p-2 block ${isActive ? '' : 'text-secondary-light hover:text-accent'} transition`
+            }
+          >
             <span className="sr-only">Home</span>
             <IconNavHome role="presentation" />
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="movies" className="p-2 block hover:opacity-50 transition">
+          <NavLink
+            to="movies"
+            className={({ isActive }) =>
+              `p-2 block ${isActive ? '' : 'text-secondary-light hover:text-accent'} transition`
+            }
+          >
             <span className="sr-only">Movies</span>
             <IconNavMovies role="presentation" />
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="tv-shows" className="p-2 block hover:opacity-50 transition">
+          <NavLink
+            to="tv-shows"
+            className={({ isActive }) =>
+              `p-2 block ${isActive ? '' : 'text-secondary-light hover:text-accent'} transition`
+            }
+          >
             <span className="sr-only">Tv Shows</span>
             <IconNavTvSeries role="presentation" />
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="bookmarks"
-            className="p-2 block hover:opacity-50 transition"
+            className={({ isActive }) =>
+              `p-2 block ${isActive ? '' : 'text-secondary-light hover:text-accent'} transition`
+            }
           >
             <span className="sr-only">Bookmarks</span>
             <IconNavBookmark role="presentation" />
-          </Link>
+          </NavLink>
         </li>
       </ul>
 
