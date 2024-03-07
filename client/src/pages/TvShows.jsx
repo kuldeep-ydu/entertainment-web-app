@@ -1,5 +1,5 @@
-import MediaSection from '../components/MediaSection';
+import GeneralMedia from '../components/GeneralMedia';
 
 export default function TvShows() {
-  return <MediaSection title="TV Shows" />;
+  return <GeneralMedia title="TV Shows" />;
 }

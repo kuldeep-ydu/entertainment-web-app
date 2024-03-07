@@ -1,10 +1,10 @@
-import MediaSection from '../components/MediaSection';
+import GeneralMedia from '../components/GeneralMedia';
 
 export default function Bookmarks() {
   return (
     <>
-      <MediaSection title="Bookmarked Movies" />
-      <MediaSection title="Bookmarked TV Shows" />
+      <GeneralMedia title="Bookmarked Movies" />
+      <GeneralMedia title="Bookmarked TV Shows" />
     </>
   );
 }

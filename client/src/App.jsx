@@ -16,7 +16,6 @@ import './globals.css';
 import Movies from './pages/Movies';
 import TvShows from './pages/TvShows';
 import Bookmarks from './pages/Bookmarks';
-import Slider from './pages/Slider';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +24,6 @@ const router = createBrowserRouter(
         <Route path="/" element={<Login />} action={loginAction} />
         <Route path="signup" element={<Signup />} action={signupAction} />
       </Route>
-      <Route path="/slider" element={<Slider />} />
 
       <Route path="/home" element={<HomeLayout />}>
         <Route index element={<Home />} />
@@ -40,7 +38,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <div className="bg-primary min-h-screen font-outfit text-[15px] text-white grid justify-content-stretch px-6 pt-8 font-light">
+    <div className="bg-primary min-h-screen font-outfit text-[15px] text-white grid justify-content-stretch pt-8 font-light">
       <RouterProvider router={router} />
     </div>
   );

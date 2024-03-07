@@ -1,5 +1,5 @@
-import MediaSection from '../components/MediaSection';
+import GeneralMedia from '../components/GeneralMedia';
 
 export default function Movies() {
-  return <MediaSection title="Movies" />;
+  return <GeneralMedia title="Movies" />;
 }

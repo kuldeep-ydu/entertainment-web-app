@@ -1,13 +1,11 @@
-import Heading from '../components/Heading';
-import MediaSection from '../components/MediaSection';
+import GeneralMedia from '../components/GeneralMedia';
+import TrendingMedia from '../components/TrendingMedia';
 
 export default function Home() {
   return (
     <>
-      <div>
-        <Heading title="Trending" size="large" />
-      </div>
-      <MediaSection title="Recommended for you" />
+      <TrendingMedia />
+      <GeneralMedia title="Recommended for you" />
     </>
   );
 }

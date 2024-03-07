@@ -4,20 +4,20 @@ import largeImage from '../assets/thumbnails/beyond-earth/trending/large.jpg';
 
 export default function TrendingMediaCard() {
   return (
-    <li className="grid grid-cols-1 grid-rows-1 align-content-end w-[470px] isolate">
-      <picture className="row-start-1 col-start-1 -z-[1] rounded-lg">
+    <li className="grid grid-cols-1 grid-rows-1 align-content-end w-[470px] isolate min-w-[470px] snap-start">
+      <picture className="row-start-1 col-start-1 -z-[1]">
         <source srcSet={largeImage} media="(min-width: 768px)" />
 
         <img
           src={smallImage}
           alt=""
-          className="block w-full"
+          className="block w-full rounded-lg"
           height="230"
           width="470"
         />
       </picture>
 
-      <div className="row-start-1 col-start-1 bg-black bg-opacity-50 opacity-0 hover:opacity-100 focus-within:opacity-100 transition relative z-10">
+      <div className="trending-card--content row-start-1 col-start-1 relative isolate before:absolute before:inset-0 before:bg-black before:opacity-0 hover:before:opacity-25 focus-within:before:opacity-25 before:transition before:-z-[1]">
         <button className="absolute top-4 right-4 p-2 bg-black bg-opacity-50 rounded-full [&_*]:hover:fill-white">
           <svg
             width="12"
@@ -28,12 +28,12 @@ export default function TrendingMediaCard() {
             <path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" />
           </svg>
         </button>
-        <button className="p-[6px] pr-5 text-md font-normal flex items-center gap-5 bg-white bg-opacity-25 rounded-full absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4">
+        <button className="play-button p-[6px] pr-5 text-md font-normal flex items-center gap-5 opacity-0 hover:scale-[1.1] focus-visible:scale-[1.1] transition bg-white bg-opacity-25 rounded-full absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4">
           <IconPlay height="30" width="30" />
           Play
         </button>
 
-        <div className="row-start-1 col-start-1 grid content-end p-6">
+        <div className="row-start-1 col-start-1 grid content-end p-6 h-full">
           <p className="flex items-center gap-2 opacity-75 text-base tracking-wide my-2">
             <span>2019</span>
             <span className="font-bold">&#183;</span>
