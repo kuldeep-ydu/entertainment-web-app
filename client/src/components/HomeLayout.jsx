@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 
 export default function HomeLayout() {
   return (
-    <div className="grid grid-cols-[auto_1fr] relative items-start pb-8">
+    <div className="flex pb-8">
       <Navbar />
       <main className="pl-9">
         <SearchBar />

@@ -31,16 +31,16 @@ export default function MediaCard() {
       </div>
 
       <p className="flex items-center gap-2 opacity-75 text-[13px] tracking-wide my-2">
-        <span>2019</span>
+        <span aria-label="Year of Release">2019</span>
         <span className="font-bold">&#183;</span>
 
-        <span className="flex gap-2 items-center">
+        <span className="flex gap-2 items-center" aria-label="Media Category">
           <IconCategoryMovie />
           Movie
         </span>
         <span className="font-bold">&#183;</span>
 
-        <span>PG</span>
+        <span aria-label="Rating">PG</span>
       </p>
 
       <h3 className="font-medium text-lg">The Great Lands</h3>
