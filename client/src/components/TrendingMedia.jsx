@@ -3,42 +3,17 @@ import TrendingMediaCard from './TrendingMediaCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-export default function TrendingMedia() {
+export default function TrendingMedia({ trendingMedia }) {
   return (
-    <div>
+    <div className="mb-6">
       <Heading title="Trending" size="large" />
 
       <Swiper slidesPerView={2.4}>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TrendingMediaCard />
-        </SwiperSlide>
+        {trendingMedia.map((media) => (
+          <SwiperSlide key={media.title}>
+            <TrendingMediaCard media={media} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

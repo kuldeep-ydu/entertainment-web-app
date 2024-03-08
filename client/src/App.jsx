@@ -8,14 +8,14 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AuthLayout from './components/AuthLayout';
 import HomeLayout from './components/HomeLayout';
-import Home from './pages/Home';
+import Home, { loader as HomeLoader } from './pages/Home';
+import Movies, { loader as MoviesLoader } from './pages/Movies';
+import TvShows, { loader as TvShowsLoader } from './pages/TvShows';
+import Bookmarks, { loader as BookmarksLoader } from './pages/Bookmarks';
 import NotFound from './pages/NotFound';
 import loginAction from './actions/loginAction';
 import signupAction from './actions/signupAction';
 import './globals.css';
-import Movies from './pages/Movies';
-import TvShows from './pages/TvShows';
-import Bookmarks from './pages/Bookmarks';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,10 +26,14 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="/home" element={<HomeLayout />}>
-        <Route index element={<Home />} />
-        <Route path="movies" element={<Movies />} />
-        <Route path="tv-shows" element={<TvShows />} />
-        <Route path="bookmarks" element={<Bookmarks />} />
+        <Route index element={<Home />} loader={HomeLoader} />
+        <Route path="movies" element={<Movies />} loader={MoviesLoader} />
+        <Route path="tv-shows" element={<TvShows />} loader={TvShowsLoader} />
+        <Route
+          path="bookmarks"
+          element={<Bookmarks />}
+          loader={BookmarksLoader}
+        />
       </Route>
       <Route path="*" element={<NotFound />} />
     </>,

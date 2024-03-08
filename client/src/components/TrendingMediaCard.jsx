@@ -1,15 +1,22 @@
-import { IconCategoryMovie, IconPlay } from '../assets';
-import smallImage from '../assets/thumbnails/beyond-earth/trending/small.jpg';
-import largeImage from '../assets/thumbnails/beyond-earth/trending/large.jpg';
+import { IconCategoryMovie, IconCategoryTv, IconPlay } from '../assets';
 
-export default function TrendingMediaCard() {
+export default function TrendingMediaCard({ media }) {
+  const {
+    title,
+    year,
+    rating,
+    category,
+    thumbnail: { trending },
+    isBookmarked,
+  } = media;
+  console.log(trending.large);
   return (
     <li className="grid grid-cols-1 grid-rows-1 align-content-end w-[470px] isolate min-w-[470px] snap-start">
       <picture className="row-start-1 col-start-1 -z-[1]">
-        <source srcSet={largeImage} media="(min-width: 768px)" />
+        <source srcSet={trending.large} media="(min-width: 768px)" />
 
         <img
-          src={smallImage}
+          src={trending.small}
           alt=""
           className="block w-full rounded-lg"
           height="230"
@@ -23,7 +30,7 @@ export default function TrendingMediaCard() {
             width="12"
             height="14"
             xmlns="http://www.w3.org/2000/svg"
-            className="*:transition stroke-[1.5] stroke-white fill-transparent"
+            className={`*:transition stroke-[1.5] stroke-white ${isBookmarked ? 'fill-white' : 'fill-transparent'}`}
           >
             <path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" />
           </svg>
@@ -35,19 +42,31 @@ export default function TrendingMediaCard() {
 
         <div className="row-start-1 col-start-1 grid content-end p-6 h-full">
           <p className="flex items-center gap-2 opacity-75 text-base tracking-wide my-2">
-            <span>2019</span>
+            <span aria-label="Year of Release">{year}</span>
             <span className="font-bold">&#183;</span>
 
-            <span className="flex gap-2 items-center">
-              <IconCategoryMovie />
-              Movie
+            <span
+              aria-label="Media Category"
+              className="flex gap-2 items-center"
+            >
+              {category === 'Movie' ? (
+                <>
+                  <IconCategoryMovie />
+                  Movie
+                </>
+              ) : (
+                <>
+                  <IconCategoryTv />
+                  Tv Series
+                </>
+              )}
             </span>
             <span className="font-bold">&#183;</span>
 
-            <span>PG</span>
+            <span aria-label="Rating">{rating}</span>
           </p>
 
-          <h3 className="font-medium text-2xl">The Great Lands</h3>
+          <h3 className="font-medium text-2xl">{title}</h3>
         </div>
       </div>
     </li>
