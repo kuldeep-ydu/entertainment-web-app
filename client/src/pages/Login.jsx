@@ -1,14 +1,30 @@
-import { Link, useNavigation } from 'react-router-dom';
+import { Link, redirect, useNavigation } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
 import Input from '../components/Input';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const schema = z.object({
   email: z.string().min(1, 'Cant be empty').email(),
   password: z.string().min(1, 'Cant be empty').min(5, 'Too small'),
 });
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  delete formData.delete('repeatPassword');
+
+  try {
+    await axios.post('/api/login', formData);
+    return redirect('/home');
+  } catch (error) {
+    toast.error(error.message);
+  }
+
+  return null;
+}
 
 export default function Login() {
   const {

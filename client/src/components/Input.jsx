@@ -21,7 +21,9 @@ export default function Input({
         disabled={disabled}
         aria-invalid={error ? 'true' : 'false'}
         autoComplete="off"
-        {...register(label, { required })}
+        {...register(label, {
+          required,
+        })}
       />
       {error && (
         <span role="alert" className="text-accent block mt-1 text-[13px]">

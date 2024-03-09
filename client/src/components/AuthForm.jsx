@@ -8,9 +8,31 @@ export default function AuthForm({
   handleSubmit,
 }) {
   const submit = useSubmit();
+
+  const parseData = (data) => {
+    const formData = new FormData();
+
+    for (const [key, value] of Object.entries(data)) {
+      if (!data[key]) return;
+
+      if (value instanceof FileList) {
+        formData.append(key, value[0]);
+      } else {
+        formData.append(key, value);
+      }
+    }
+
+    return formData;
+  };
+
   return (
     <Form
-      onSubmit={handleSubmit((data) => submit(data, { method: 'POST' }))}
+      onSubmit={handleSubmit((data) =>
+        submit(parseData(data), {
+          method: 'POST',
+          encType: 'multipart/form-data',
+        }),
+      )}
       className={`rounded-xl shadow-md bg-secondary-dark p-7 w-full sm:w-[400px] flex flex-col ${title === 'Login' ? 'gap-9' : 'gap-5'} mx-6 *:min-w-0`}
     >
       <h1 className="text-[32px]">{title}</h1>
