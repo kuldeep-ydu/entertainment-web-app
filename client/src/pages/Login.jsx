@@ -1,4 +1,9 @@
-import { Link, redirect, useNavigation } from 'react-router-dom';
+import {
+  Link,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
 import Input from '../components/Input';
 import { z } from 'zod';
@@ -6,6 +11,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useContext } from 'react';
+import { UserContext } from '../context/userProvider';
 
 const schema = z.object({
   email: z.string().min(1, 'Cant be empty').email(),
@@ -14,16 +21,15 @@ const schema = z.object({
 
 export async function action({ request }) {
   const formData = await request.formData();
-  delete formData.delete('repeatPassword');
 
   try {
-    await axios.post('/api/login', formData);
-    return redirect('/home');
+    const response = await axios.post('/api/login', formData);
+    toast.success('Logged in successfully');
+    return response.data;
   } catch (error) {
-    toast.error(error.message);
+    const message = error.response.data.message || error.message;
+    toast.error(message);
   }
-
-  return null;
 }
 
 export default function Login() {
@@ -39,6 +45,14 @@ export default function Login() {
     },
   });
   const { state } = useNavigation();
+  const userData = useActionData();
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+
+  if (userData) {
+    setUser(userData);
+    navigate('/');
+  }
 
   const body = (
     <>

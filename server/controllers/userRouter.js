@@ -44,16 +44,19 @@ userRouter.post(
       const passwordHash = await bcrypt.hash(password, saltRounds);
 
       const dataURI = getURI(file);
-      const avatar = await handleUpload(dataURI);
+      const { url: avatar } = await handleUpload(dataURI);
 
-      const user = {
+      const user = new User({
         email,
         passwordHash,
         avatar,
-      };
+      });
+
+      await user.save();
 
       return response.status(201).json(user);
     } catch (error) {
+      console.log(error.message);
       return response.status(500).json({ message: error.message });
     }
   },

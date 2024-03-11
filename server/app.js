@@ -6,6 +6,8 @@ const config = require('./utils/config');
 const logger = require('./utils/logger');
 const mediaRouter = require('./controllers/mediaRouter');
 const userRouter = require('./controllers/userRouter');
+const cookieParser = require('cookie-parser');
+const loginRouter = require('./controllers/loginRouter');
 
 logger.info('connecting to', config.MONGODB_URI);
 
@@ -18,11 +20,12 @@ mongoose
 
 app.set('view engine', 'ejs');
 app.use(cors());
-app.use(express.static('dist'));
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use(mediaRouter);
+app.use(loginRouter);
 app.use(userRouter);
 
 module.exports = app;

@@ -1,35 +1,28 @@
 const loginRouter = require('express').Router();
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const upload = multer();
+const verifyToken = require('../utils/middleware');
 
-loginRouter.post('', async (request, response) => {
-  const { email, password, avatar } = request.body;
+loginRouter.post('/api/login', upload.none(), async (request, response) => {
+  const { email, password } = request.body;
 
-  if (!email || !password || !avatar) {
+  if (!email || !password) {
     return response
       .status(400)
       .json({ message: 'Email and password are required.' });
   }
 
-  const existingUser = await User.find((user) => user.email === email);
+  const existingUser = await User.findOne({ email });
 
   if (!existingUser) {
     return response.status(401).json({ message: 'User does not exist.' });
   }
 
-  const accessToken = jwt.sign({ email }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: '30s',
-  });
+  const token = jwt.sign({ email }, process.env.TOKEN_SECRET);
 
-  const refreshToken = jwt.sign({ email }, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: '1d',
-  });
-
-  existingUser.refreshToken = refreshToken;
-
-  await existingUser.save();
-
-  response.cookie('jwt', refreshToken, {
+  response.cookie('jwt', token, {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
@@ -37,11 +30,22 @@ loginRouter.post('', async (request, response) => {
   });
 
   return response.json({
-    email,
-    password,
-    avatar,
-    accessToken,
+    avatar: existingUser.avatar,
   });
 });
+
+loginRouter.post(
+  '/api/is-authenticated',
+  verifyToken,
+  async (request, response) => {
+    if (!request.user) {
+      return response.status(204).json({ isAuthenticated: false });
+    }
+
+    const user = await User.findOne({ email: request.user });
+
+    return response.json({ avatar: user.avatar, isAuthenticated: true });
+  },
+);
 
 module.exports = loginRouter;

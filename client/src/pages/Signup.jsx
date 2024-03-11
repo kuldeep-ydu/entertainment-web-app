@@ -41,9 +41,11 @@ export async function action({ request }) {
 
   try {
     await axios.post('/api/sign-up', formData);
+    toast.success('Account created successfully');
     return redirect('/');
   } catch (error) {
-    toast.error(error.message);
+    const message = error.response.data.message || error.message;
+    toast.error(message);
   }
 
   return null;

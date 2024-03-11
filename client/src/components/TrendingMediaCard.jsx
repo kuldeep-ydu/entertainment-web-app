@@ -9,7 +9,7 @@ export default function TrendingMediaCard({ media }) {
     thumbnail: { trending },
     isBookmarked,
   } = media;
-  console.log(trending.large);
+
   return (
     <li className="grid grid-cols-1 grid-rows-1 align-content-end w-[470px] isolate min-w-[470px] snap-start">
       <picture className="row-start-1 col-start-1 -z-[1]">

@@ -4,11 +4,10 @@ import {
   IconNavHome,
   IconNavMovies,
   IconNavTvSeries,
-  ImageAvatar,
   Logo,
 } from '../assets';
 
-export default function Navbar() {
+export default function Navbar({ avatar }) {
   return (
     <nav className="flex flex-col items-center py-8 px-6 bg-secondary-dark rounded-3xl md:h-[90vh] sticky top-[5vh]">
       <img src={Logo} alt="Entertainment Logo" height="32" width="32" />
@@ -63,7 +62,7 @@ export default function Navbar() {
 
       <img
         className="mt-auto border border-white rounded-full aspect-square object-cover"
-        src={ImageAvatar}
+        src={avatar}
         alt="profile picture"
         height="40"
         width="40"
