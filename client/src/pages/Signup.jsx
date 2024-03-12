@@ -4,7 +4,7 @@ import Input from '../components/Input';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
+import axios from '../axios';
 import { toast } from 'react-hot-toast';
 
 const schema = z

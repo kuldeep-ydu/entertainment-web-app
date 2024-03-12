@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import axios from '../axios';
 import { useContext } from 'react';
 import { UserContext } from '../context/userProvider';
 
@@ -24,7 +24,9 @@ export async function action({ request }) {
   const formData = await request.formData();
 
   try {
-    const response = await axios.post('/api/login', formData);
+    const response = await axios.post('/api/login', formData, {
+      withCredentials: true,
+    });
     toast.dismiss(toastId);
     toast.success('Logged in successfully');
     return response.data;

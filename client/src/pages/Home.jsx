@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import GeneralMedia from '../components/GeneralMedia';
 import TrendingMedia from '../components/TrendingMedia';
-import axios from 'axios';
+import axios from '../axios';
 import { useContext } from 'react';
 import { UserContext } from '../context/userProvider';
 import { toast } from 'react-hot-toast';
@@ -26,7 +26,7 @@ export default function Home() {
     const toastId = toast.loading('Logging out ...');
 
     try {
-      await axios.get('/api/logout');
+      await axios.get('/api/logout', { withCredentials: true });
       localStorage.removeItem('entertainmentAppUser');
       setUser(null);
       toast.dismiss(toastId);

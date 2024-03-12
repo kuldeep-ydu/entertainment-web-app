@@ -7,6 +7,5 @@ export default defineConfig({
   plugins: [react(), svgr()],
   server: {
     port: 3000,
-    proxy: { '/api': { target: 'http://localhost:3003', changeOrigin: true } },
   },
 });

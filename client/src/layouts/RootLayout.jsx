@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { UserContext } from '../context/userProvider';

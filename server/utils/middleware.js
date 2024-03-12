@@ -20,12 +20,16 @@ const verifyToken = async (request, response, next) => {
 
   const token = cookies.jwt;
 
-  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-  const user = await User.findOne({ email: decodedToken.email });
+  if (!token) {
+    next();
+  } else {
+    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    const user = await User.findOne({ email: decodedToken.email });
 
-  request['user'] = user;
+    request['user'] = user;
 
-  next();
+    next();
+  }
 };
 
 module.exports = { requestLogger, verifyToken };

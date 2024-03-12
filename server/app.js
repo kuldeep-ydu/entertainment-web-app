@@ -9,7 +9,6 @@ const userRouter = require('./controllers/userRouter');
 const cookieParser = require('cookie-parser');
 const loginRouter = require('./controllers/loginRouter');
 const logoutRouter = require('./controllers/logoutRouter');
-const path = require('path');
 
 logger.info('connecting to', config.MONGODB_URI);
 
@@ -21,8 +20,15 @@ mongoose
   .catch((error) => logger.error(`error connecting to MongoDB ${error}`));
 
 app.set('view engine', 'ejs');
-app.use(cors());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(
+  cors({
+    origin: config.CLIENT_URL,
+    methods: ['GET', 'POST'],
+    credentials: true,
+  }),
+);
+console.log(config.CLIENT_URL);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
