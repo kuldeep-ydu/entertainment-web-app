@@ -31,9 +31,10 @@ export async function action({ request }) {
   } catch (error) {
     const message = error.response.data.message || error.message;
     toast.dismiss(toastId);
-
     toast.error(message);
   }
+
+  return null;
 }
 
 export default function Login() {
