@@ -39,7 +39,9 @@ export default function Home() {
 
   return (
     <>
-      <button onClick={logout}>logout</button>
+      <button onClick={logout} className="hidden">
+        logout
+      </button>
       <TrendingMedia trendingMedia={trendingMedia} />
       <GeneralMedia title="Recommended for you" data={recommendedMedia} />
     </>
