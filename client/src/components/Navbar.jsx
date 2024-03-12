@@ -9,10 +9,10 @@ import {
 
 export default function Navbar({ avatar }) {
   return (
-    <nav className="flex flex-col items-center py-8 px-6 bg-secondary-dark rounded-3xl md:h-[90vh] sticky top-[5vh]">
+    <nav className="flex md:flex-col justify-between items-center py-4 md:py-8 px-6 sm:mx-6 mt-0 sm:mt-6 bg-secondary-dark sm:rounded-lg md:rounded-3xl md:h-[90vh] sticky top-0 sm:top-6 z-50">
       <img src={Logo} alt="Entertainment Logo" height="32" width="32" />
 
-      <ul className="grid justify-items-center gap-6 mt-16">
+      <ul className="grid grid-flow-col md:grid-flow-row justify-items-center gap-6 md:mt-16">
         <li>
           <NavLink
             to="."

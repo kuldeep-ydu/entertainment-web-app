@@ -1,23 +1,43 @@
 import axios from 'axios';
-import { useContext, useEffect } from 'react';
-import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { UserContext } from '../context/userProvider';
-
-export async function loader() {
-  const response = await axios.post('/api/is-authenticated');
-  return response.data;
-}
+import { Triangle } from 'react-loader-spinner';
 
 export default function RootLayout() {
-  const data = useLoaderData();
-  const { setUser } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+  const [checkingUser, setCheckingUser] = useState(true);
 
   useEffect(() => {
-    if (data.isAuthenticated) {
-      setUser({ avatar: data.avatar });
-    }
-  }, [data, setUser, navigate]);
+    const checkAuth = async () => {
+      const userExists = localStorage.getItem('entertainmentAppUser');
 
-  return <Outlet />;
+      if (!userExists || user) {
+        setCheckingUser(false);
+        return;
+      }
+
+      const response = await axios.post('/api/is-authenticated');
+      setUser(response.data);
+      setCheckingUser(false);
+    };
+
+    checkAuth();
+  }, [setUser, user]);
+
+  return checkingUser ? (
+    <div className="grid place-content-center min-h-screen">
+      <Triangle
+        visible={true}
+        height="80"
+        width="80"
+        color="hsl(0 97% 63%)"
+        ariaLabel="triangle-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+      />
+    </div>
+  ) : (
+    <Outlet />
+  );
 }

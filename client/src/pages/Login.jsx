@@ -20,14 +20,18 @@ const schema = z.object({
 });
 
 export async function action({ request }) {
+  const toastId = toast.loading('Loading...');
   const formData = await request.formData();
 
   try {
     const response = await axios.post('/api/login', formData);
+    toast.dismiss(toastId);
     toast.success('Logged in successfully');
     return response.data;
   } catch (error) {
     const message = error.response.data.message || error.message;
+    toast.dismiss(toastId);
+
     toast.error(message);
   }
 }
@@ -50,6 +54,7 @@ export default function Login() {
   const { setUser } = useContext(UserContext);
 
   if (userData) {
+    localStorage.setItem('entertainmentAppUser', JSON.stringify(userData));
     setUser(userData);
     navigate('/');
   }
@@ -97,6 +102,7 @@ export default function Login() {
       buttonLabel="Login to your account"
       footer={footer}
       handleSubmit={handleSubmit}
+      submitting={state === 'submitting'}
     />
   );
 }

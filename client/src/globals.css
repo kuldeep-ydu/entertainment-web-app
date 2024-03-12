@@ -7,3 +7,7 @@
 .trending-card--content:where(:focus-within, :hover) .play-button {
   opacity: 1;
 }
+
+.triangle-loader polygon {
+  stroke-width: 3;
+}

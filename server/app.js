@@ -8,6 +8,7 @@ const mediaRouter = require('./controllers/mediaRouter');
 const userRouter = require('./controllers/userRouter');
 const cookieParser = require('cookie-parser');
 const loginRouter = require('./controllers/loginRouter');
+const logoutRouter = require('./controllers/logoutRouter');
 const path = require('path');
 
 logger.info('connecting to', config.MONGODB_URI);
@@ -28,6 +29,7 @@ app.use(cookieParser());
 
 app.use(mediaRouter);
 app.use(loginRouter);
+app.use(logoutRouter);
 app.use(userRouter);
 
 module.exports = app;

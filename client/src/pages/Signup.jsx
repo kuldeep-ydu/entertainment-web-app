@@ -131,6 +131,7 @@ export default function Signup() {
       buttonLabel="Create an account"
       footer={footer}
       handleSubmit={handleSubmit}
+      submitting={state == 'submitting'}
     />
   );
 }

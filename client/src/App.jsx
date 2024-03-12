@@ -8,7 +8,7 @@ import Login, { action as loginAction } from './pages/Login';
 import Signup, { action as signupAction } from './pages/Signup';
 import AuthLayout from './layouts/AuthLayout';
 import HomeLayout from './layouts/HomeLayout';
-import RootLayout, { loader as rootLoader } from './layouts/RootLayout';
+import RootLayout from './layouts/RootLayout';
 import Home, { loader as homeLoader } from './pages/Home';
 import Movies, { loader as moviesLoader } from './pages/Movies';
 import TvShows, { loader as tvShowsLoader } from './pages/TvShows';
@@ -20,7 +20,7 @@ import UserProvider from './context/userProvider';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />} loader={rootLoader}>
+    <Route path="/" element={<RootLayout />}>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} loader={homeLoader} />
         <Route path="movies" element={<Movies />} loader={moviesLoader} />
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <UserProvider>
-      <div className="bg-primary min-h-screen font-outfit text-[15px] text-white grid justify-content-stretch pt-8 font-light">
+      <div className="bg-primary min-h-screen font-outfit text-[15px] text-white grid justify-content-stretch font-light">
         <RouterProvider router={router} />
         <Toaster />
       </div>

@@ -7,7 +7,7 @@ export default function AuthLayout() {
   const { user } = useContext(UserContext);
 
   return !user ? (
-    <div className="grid justify-items-center content-start py-1">
+    <div className="grid justify-items-center content-start py-1 pt-8">
       <img src={logo} alt="app logo" className="block max-w-full mt-8 mb-16" />
       <Outlet />
     </div>

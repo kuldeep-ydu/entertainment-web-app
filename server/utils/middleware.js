@@ -1,8 +1,18 @@
 require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
+const logger = require('./logger');
+const User = require('../models/User');
 
-const verifyToken = (request, response, next) => {
+const requestLogger = (request, response, next) => {
+  logger.info('Method', request.method);
+  logger.info('Path', request.path);
+  logger.info('Body', request.body);
+  logger.info('---');
+  next();
+};
+
+const verifyToken = async (request, response, next) => {
   const cookies = request.cookies;
   if (!cookies?.jwt) {
     next();
@@ -10,11 +20,12 @@ const verifyToken = (request, response, next) => {
 
   const token = cookies.jwt;
 
-  jwt.verify(token, process.env.TOKEN_SECRET, (error, decoded) => {
-    if (error) response.sendStatus(403);
-    request['user'] = decoded.email;
-    next();
-  });
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const user = await User.findOne({ email: decodedToken.email });
+
+  request['user'] = user;
+
+  next();
 };
 
-module.exports = verifyToken;
+module.exports = { requestLogger, verifyToken };

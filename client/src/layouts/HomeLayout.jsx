@@ -10,10 +10,10 @@ export default function HomeLayout() {
   return !user ? (
     <Navigate to="/login" replace />
   ) : (
-    <div className="grid grid-cols-[auto_1fr] pb-8 pl-6">
+    <div className="grid md:grid-cols-[auto_1fr] pb-8">
       <Navbar avatar={user.avatar} />
 
-      <main className="pl-9 min-w-0">
+      <main className="min-w-0">
         <SearchBar />
         <Outlet />
       </main>

@@ -6,6 +6,7 @@ export default function AuthForm({
   footer,
   buttonLabel,
   handleSubmit,
+  submitting,
 }) {
   const submit = useSubmit();
 
@@ -40,7 +41,8 @@ export default function AuthForm({
       <div className="flex flex-col gap-4">{body}</div>
 
       <button
-        className="py-3 block w-full bg-accent hover:bg-white focus-visible:bg-white hover:text-secondary-dark focus-visible:text-secondary-dark transition rounded-md"
+        disabled={submitting}
+        className="py-3 w-full grid place-content-center bg-accent hover:bg-white focus-visible:bg-white hover:text-secondary-dark focus-visible:text-secondary-dark transition rounded-md"
         type="submit"
       >
         {buttonLabel}

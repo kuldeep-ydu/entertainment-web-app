@@ -1,26 +1,13 @@
 const logoutRouter = require('express').Router();
-const User = require('../models/User');
 
-logoutRouter.get('/logout', async (request, response) => {
-  const cookies = request.cookies;
+logoutRouter.get('/api/logout', async (request, response) => {
+  response.clearCookie('jwt', {
+    httpOnly: true,
+    sameSite: 'None',
+    secure: true,
+  });
 
-  if (!cookies?.jwt) {
-    return response.status(204);
-  }
-
-  const refreshToken = cookies.jwt;
-
-  const existingUser = await User.findOne(
-    (user) => user.refreshToken === refreshToken,
-  );
-
-  if (!existingUser) {
-    response.clearCookie('jwt', { httpOnly: true });
-    return response.status(204);
-  }
-
-  response.clearCookie('jwt', { httpOnly: true, secure: true });
-  return response.status(204);
+  return response.sendStatus(204);
 });
 
 module.exports = logoutRouter;
