@@ -1,8 +1,8 @@
-import axios from '../axios';
 import { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { UserContext } from '../context/userProvider';
 import { Triangle } from 'react-loader-spinner';
+import authService from '../services/authService';
 
 export default function RootLayout() {
   const { user, setUser } = useContext(UserContext);
@@ -10,16 +10,21 @@ export default function RootLayout() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const userExists = localStorage.getItem('entertainmentAppUser');
+      setCheckingUser(true);
 
-      if (!userExists || user) {
+      if (user) {
         setCheckingUser(false);
         return;
       }
 
-      const response = await axios.post('/api/is-authenticated');
-      setUser(response.data);
-      setCheckingUser(false);
+      try {
+        const credentials = await authService.checkAuthentication();
+        setUser(credentials);
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        setCheckingUser(false);
+      }
     };
 
     checkAuth();

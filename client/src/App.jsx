@@ -4,19 +4,24 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
-import Login, { action as loginAction } from './pages/Login';
-import Signup, { action as signupAction } from './pages/Signup';
+
 import AuthLayout from './layouts/AuthLayout';
 import HomeLayout from './layouts/HomeLayout';
 import RootLayout from './layouts/RootLayout';
+
+import Login, { action as loginAction } from './pages/Login';
+import Signup, { action as signupAction } from './pages/Signup';
+
 import Home, { loader as homeLoader } from './pages/Home';
 import Movies, { loader as moviesLoader } from './pages/Movies';
-import TvShows, { loader as tvShowsLoader } from './pages/TvShows';
+import TvSeries, { loader as tvSeriesLoader } from './pages/TvSeries';
 import Bookmarks, { loader as bookmarksLoader } from './pages/Bookmarks';
+
+import UserProvider from './context/userProvider';
 import NotFound from './pages/NotFound';
 import { Toaster } from 'react-hot-toast';
+
 import './globals.css';
-import UserProvider from './context/userProvider';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,7 +29,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} loader={homeLoader} />
         <Route path="movies" element={<Movies />} loader={moviesLoader} />
-        <Route path="tv-shows" element={<TvShows />} loader={tvShowsLoader} />
+        <Route path="tv-shows" element={<TvSeries />} loader={tvSeriesLoader} />
         <Route
           path="bookmarks"
           element={<Bookmarks />}

@@ -10,9 +10,9 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
-import axios from '../axios';
 import { useContext } from 'react';
 import { UserContext } from '../context/userProvider';
+import authService from '../services/authService';
 
 const schema = z.object({
   email: z.string().min(1, 'Cant be empty').email(),
@@ -24,9 +24,7 @@ export async function action({ request }) {
   const formData = await request.formData();
 
   try {
-    const response = await axios.post('/api/login', formData, {
-      withCredentials: true,
-    });
+    const response = await authService.login(formData);
     toast.dismiss(toastId);
     toast.success('Logged in successfully');
     return response.data;
@@ -57,7 +55,6 @@ export default function Login() {
   const { setUser } = useContext(UserContext);
 
   if (userData) {
-    localStorage.setItem('entertainmentAppUser', JSON.stringify(userData));
     setUser(userData);
     navigate('/');
   }

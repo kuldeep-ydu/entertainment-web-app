@@ -2,13 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
+const cookieParser = require('cookie-parser');
+
 const config = require('./utils/config');
 const logger = require('./utils/logger');
-const mediaRouter = require('./controllers/mediaRouter');
+
 const userRouter = require('./controllers/userRouter');
-const cookieParser = require('cookie-parser');
-const loginRouter = require('./controllers/loginRouter');
-const logoutRouter = require('./controllers/logoutRouter');
+const authRouter = require('./controllers/authRouter');
+const mediaRouter = require('./controllers/mediaRouter');
+const bookmarkRouter = require('./controllers/bookmarkRouter');
+
+const middleware = require('./utils/middleware');
 
 logger.info('connecting to', config.MONGODB_URI);
 
@@ -27,15 +31,16 @@ app.use(
     credentials: true,
   }),
 );
-console.log(config.CLIENT_URL);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(mediaRouter);
-app.use(loginRouter);
-app.use(logoutRouter);
+app.use(middleware.requestLogger);
+
 app.use(userRouter);
+app.use(authRouter);
+app.use(mediaRouter);
+app.use(bookmarkRouter);
 
 module.exports = app;

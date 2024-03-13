@@ -4,8 +4,8 @@ import Input from '../components/Input';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from '../axios';
 import { toast } from 'react-hot-toast';
+import userService from '../services/userService';
 
 const schema = z
   .object({
@@ -40,7 +40,7 @@ export async function action({ request }) {
   delete formData.delete('repeatPassword');
 
   try {
-    await axios.post('/api/sign-up', formData);
+    await userService.signup(formData);
     toast.success('Account created successfully');
     return redirect('/');
   } catch (error) {

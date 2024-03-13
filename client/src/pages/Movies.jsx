@@ -1,10 +1,10 @@
 import { useLoaderData } from 'react-router-dom';
 import GeneralMedia from '../components/GeneralMedia';
-import axios from '../axios';
+import mediaService from '../services/mediaService';
 
 export async function loader() {
-  const response = await axios.get('/api/movies');
-  return response.data;
+  const data = await mediaService.getMovies();
+  return data;
 }
 
 export default function Movies() {

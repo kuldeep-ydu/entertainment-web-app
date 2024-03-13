@@ -1,20 +1,21 @@
 import { useLoaderData } from 'react-router-dom';
 import GeneralMedia from '../components/GeneralMedia';
 import TrendingMedia from '../components/TrendingMedia';
-import axios from '../axios';
 import { useContext } from 'react';
 import { UserContext } from '../context/userProvider';
 import { toast } from 'react-hot-toast';
+import authService from '../services/authService';
+import mediaService from '../services/mediaService';
 
 export async function loader() {
-  const response = await Promise.all([
-    axios.get('/api/recommended-media'),
-    axios.get('/api/trending-media'),
+  const data = await Promise.all([
+    mediaService.getRecommended(),
+    mediaService.getTrending(),
   ]);
 
   return {
-    recommendedMedia: response[0].data,
-    trendingMedia: response[1].data,
+    recommendedMedia: data[0],
+    trendingMedia: data[1],
   };
 }
 
@@ -26,8 +27,7 @@ export default function Home() {
     const toastId = toast.loading('Logging out ...');
 
     try {
-      await axios.get('/api/logout', { withCredentials: true });
-      localStorage.removeItem('entertainmentAppUser');
+      await authService.logout();
       setUser(null);
       toast.dismiss(toastId);
       toast.success('Logged out successfully');
