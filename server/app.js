@@ -23,11 +23,8 @@ mongoose
   .catch((error) => logger.error(`error connecting to MongoDB ${error}`));
 
 app.set('view engine', 'ejs');
-app.use(function (request, response, next) {
-  response.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://entertainment-web-app-jet.vercel.app',
-  );
+app.use(function (_, response, next) {
+  response.setHeader('Access-Control-Allow-Origin', config.CLIENT_URL);
   response.setHeader('Access-Control-Allow-Methods', 'GET,POST');
   response.setHeader('Access-Control-Allow-Credentials', true);
 
