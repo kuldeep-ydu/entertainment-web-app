@@ -14,7 +14,7 @@ export default function Input({
       </label>
 
       <input
-        className={`border-b-[1px] caret-accent ${error ? 'border-accent' : 'border-white'} placeholder-shown:text-opacity-50 border-opacity-50 focus-visible:border-opacity-100 focus-visible:text-opacity-100 focus-visible:outline-0 px-4 py-3 bg-inherit block w-full`}
+        className={`border-b-[1px] caret-accent ${error ? 'border-accent' : 'border-white'} block w-full border-opacity-50 bg-inherit px-4 py-3 placeholder-shown:text-opacity-50 focus-visible:border-opacity-100 focus-visible:text-opacity-100 focus-visible:outline-0`}
         type={type}
         id={label}
         placeholder={placeholder}
@@ -26,7 +26,7 @@ export default function Input({
         })}
       />
       {error && (
-        <span role="alert" className="text-accent block mt-1 text-[13px]">
+        <span role="alert" className="mt-1 block text-[13px] text-accent">
           {error.message}
         </span>
       )}

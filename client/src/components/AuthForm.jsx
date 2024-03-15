@@ -34,7 +34,7 @@ export default function AuthForm({
           encType: 'multipart/form-data',
         }),
       )}
-      className={`rounded-xl shadow-md bg-secondary-dark p-7 w-full sm:w-[400px] flex flex-col ${title === 'Login' ? 'gap-9' : 'gap-5'} mx-6 *:min-w-0`}
+      className={`flex w-full flex-col rounded-xl bg-secondary-dark p-7 shadow-md sm:w-[400px] ${title === 'Login' ? 'gap-9' : 'gap-5'} mx-6 *:min-w-0`}
     >
       <h1 className="text-[32px]">{title}</h1>
 
@@ -42,7 +42,7 @@ export default function AuthForm({
 
       <button
         disabled={submitting}
-        className="py-3 w-full grid place-content-center bg-accent hover:bg-white focus-visible:bg-white hover:text-secondary-dark focus-visible:text-secondary-dark transition rounded-md"
+        className="grid w-full place-content-center rounded-md bg-accent py-3 transition hover:bg-white hover:text-secondary-dark focus-visible:bg-white focus-visible:text-secondary-dark"
         type="submit"
       >
         {buttonLabel}

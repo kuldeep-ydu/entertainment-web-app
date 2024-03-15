@@ -24,14 +24,13 @@ export async function action({ request }) {
   const formData = await request.formData();
 
   try {
-    const response = await authService.login(formData);
+    const userData = await authService.login(formData);
     toast.dismiss(toastId);
     toast.success('Logged in successfully');
-    return response.data;
+    return userData;
   } catch (error) {
-    const message = error.response.data.message || error.message;
     toast.dismiss(toastId);
-    toast.error(message);
+    toast.error(error.message);
   }
 
   return null;
@@ -88,7 +87,7 @@ export default function Login() {
       Don&apos;t have an account?{' '}
       <Link
         to="/signup"
-        className="ml-2 pb-1 text-accent border-b-[1px] border-transparent hover:border-accent focus-visible:border-accent transition"
+        className="ml-2 border-b-[1px] border-transparent pb-1 text-accent transition hover:border-accent focus-visible:border-accent"
       >
         Sign Up
       </Link>

@@ -31,7 +31,7 @@ export default function RootLayout() {
   }, [setUser, user]);
 
   return checkingUser ? (
-    <div className="grid place-content-center min-h-screen">
+    <div className="grid min-h-screen place-content-center">
       <Triangle
         visible={true}
         height="80"

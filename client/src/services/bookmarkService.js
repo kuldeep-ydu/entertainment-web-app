@@ -1,7 +1,7 @@
-import axiosInstance from './axiosInstance';
+import api from './api';
 
 const getBookmarks = async () => {
-  const response = await axiosInstance.get('/api/bookmarks');
+  const response = await api.get('/api/bookmarks');
   return response.data;
 };
 

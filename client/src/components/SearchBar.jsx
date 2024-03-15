@@ -1,17 +1,20 @@
 import { IconSearch } from '../assets';
 
-export default function SearchBar() {
+export default function SearchBar({ searchValue, setSearchValue }) {
   return (
-    <div className="flex gap-5 mb-6 ml-4 pr-6 mt-6 text-base sm:text-2xl items-center">
+    <div className="mb-6 ml-4 mt-6 flex items-center gap-5 pr-6 text-base sm:text-2xl">
       <label htmlFor="search-bar">
         <span className="sr-only">Search movies and tv shows</span>
         <IconSearch height="32" width="32" />
       </label>
+
       <input
+        onChange={({ target }) => setSearchValue(target.value)}
+        value={searchValue}
         id="search-bar"
         type="text"
         placeholder="Search for movies or TV series"
-        className="w-full bg-inherit outline-0 py-3 caret-accent border-b-[1px] border-transparent focus-visible:border-secondary-light transition"
+        className="w-full border-b-[1px] border-transparent bg-inherit py-3 caret-accent outline-0 transition focus-visible:border-secondary-light"
       />
     </div>
   );

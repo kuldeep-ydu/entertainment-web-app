@@ -9,6 +9,6 @@ export async function loader() {
 
 export default function Movies() {
   const movies = useLoaderData();
-  console.log(movies);
+
   return <GeneralMedia title="Movies" data={movies} />;
 }

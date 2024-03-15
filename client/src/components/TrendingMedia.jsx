@@ -11,10 +11,19 @@ export default function TrendingMedia({ trendingMedia }) {
       <Swiper
         slidesPerView={1.5}
         breakpoints={{
-          640: {
-            slidesPerView: 1.3,
+          200: {
+            slidesPerView: 1,
           },
-          768: {
+          300: {
+            slidesPerView: 1.2,
+          },
+          400: {
+            slidesPerView: 1.5,
+          },
+          500: {
+            slidesPerView: 1.8,
+          },
+          640: {
             slidesPerView: 2.3,
           },
         }}

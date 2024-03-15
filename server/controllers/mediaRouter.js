@@ -1,9 +1,10 @@
 const mediaRouter = require('express').Router();
 const Media = require('../models/Media');
 
-mediaRouter.get('/api/media', async (_, response) => {
-  const result = await Media.find({});
-  return response.status(200).json(result);
+mediaRouter.get('/api/media', async (request, response) => {
+  const { title } = request.query;
+  const results = await Media.find({ title: { $regex: title, $options: 'i' } });
+  return response.status(200).json(results);
 });
 
 mediaRouter.get('/api/media/recommended', async (_, response) => {

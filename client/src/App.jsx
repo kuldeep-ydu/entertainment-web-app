@@ -29,7 +29,11 @@ const router = createBrowserRouter(
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} loader={homeLoader} />
         <Route path="movies" element={<Movies />} loader={moviesLoader} />
-        <Route path="tv-shows" element={<TvSeries />} loader={tvSeriesLoader} />
+        <Route
+          path="tv-series"
+          element={<TvSeries />}
+          loader={tvSeriesLoader}
+        />
         <Route
           path="bookmarks"
           element={<Bookmarks />}
@@ -49,7 +53,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <UserProvider>
-      <div className="bg-primary min-h-screen font-outfit text-[15px] text-white grid justify-content-stretch font-light">
+      <div className="justify-content-stretch grid min-h-screen bg-primary font-outfit text-[15px] font-light text-white">
         <RouterProvider router={router} />
         <Toaster />
       </div>

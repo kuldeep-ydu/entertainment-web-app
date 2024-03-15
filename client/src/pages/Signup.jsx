@@ -117,7 +117,7 @@ export default function Signup() {
       Already have an account?{' '}
       <Link
         to="/"
-        className="ml-2 pb-1 text-accent border-b-[1px] border-transparent hover:border-accent focus-visible:border-accent transition"
+        className="ml-2 border-b-[1px] border-transparent pb-1 text-accent transition hover:border-accent focus-visible:border-accent"
       >
         Login
       </Link>
