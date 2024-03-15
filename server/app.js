@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 const cookieParser = require('cookie-parser');
@@ -24,16 +23,18 @@ mongoose
   .catch((error) => logger.error(`error connecting to MongoDB ${error}`));
 
 app.set('view engine', 'ejs');
-app.use(
-  '/',
-  cors({
-    origin: config.CLIENT_URL,
-    methods: ['GET', 'POST'],
-    credentials: true,
-  }),
-);
+app.use(function (request, response, next) {
+  response.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://entertainment-web-app-jet.vercel.app',
+  );
+  response.setHeader('Access-Control-Allow-Methods', 'GET,POST');
+  response.setHeader('Access-Control-Allow-Credentials', true);
 
-console.log('CLIENT ADDRES ===========> ', config.CLIENT_URL);
+  next();
+});
+
+console.log('CLIENT ADDRESS ===========> ', config.CLIENT_URL);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
