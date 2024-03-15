@@ -25,12 +25,15 @@ mongoose
 
 app.set('view engine', 'ejs');
 app.use(
+  '/',
   cors({
     origin: config.CLIENT_URL,
     methods: ['GET', 'POST'],
     credentials: true,
   }),
 );
+
+console.log('CLIENT ADDRES ===========> ', config.CLIENT_URL);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

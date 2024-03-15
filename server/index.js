@@ -5,6 +5,6 @@ const http = require('http');
 
 const server = http.createServer(app);
 
-server.listen(config.PORT, () => {
+server.listen(config.PORT, '0.0.0.0', () => {
   logger.info(`Server running on port ${config.PORT}`);
 });

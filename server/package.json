@@ -7,7 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "start": "node --inspect index.js",
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "build:ui": "rm -rf dist && cd ../client && npm run build && cp -r dist ../server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,6 +31,7 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.2",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5"
   }
