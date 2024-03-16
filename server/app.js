@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const config = require('./utils/config');
 const logger = require('./utils/logger');
@@ -23,16 +24,13 @@ mongoose
   .catch((error) => logger.error(`error connecting to MongoDB ${error}`));
 
 app.set('view engine', 'ejs');
-app.use(function (_, response, next) {
-  response.setHeader('Access-Control-Allow-Origin', config.CLIENT_URL);
-  response.setHeader('Access-Control-Allow-Methods', 'GET,POST');
-  response.setHeader('Access-Control-Allow-Credentials', true);
-
-  next();
-});
-
-console.log('CLIENT ADDRESS ===========> ', config.CLIENT_URL);
-
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  }),
+);
+app.use(express.static('dist'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

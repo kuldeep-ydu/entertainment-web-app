@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../context/userProvider';
 import authService from '../services/authService';
 
@@ -52,6 +52,14 @@ export default function Login() {
   const userData = useActionData();
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const id = toast('Email: demo@demo.com \n Password: demo1234', {
+      duration: 10000,
+    });
+
+    return () => toast.dismiss(id);
+  }, []);
 
   if (userData) {
     setUser(userData);
