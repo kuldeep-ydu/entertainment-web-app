@@ -23,12 +23,15 @@ const verifyToken = async (request, response, next) => {
   if (!token) {
     next();
   } else {
-    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-    const user = await User.findOne({ email: decodedToken.email });
+    try {
+      const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+      const user = await User.findOne({ email: decodedToken.email });
+      request['user'] = user;
 
-    request['user'] = user;
-
-    next();
+      next();
+    } catch (error) {
+      return response.sendStatus(204);
+    }
   }
 };
 
