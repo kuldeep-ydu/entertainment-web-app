@@ -30,7 +30,6 @@ app.use(
     credentials: true,
   }),
 );
-app.use(express.static('dist'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
