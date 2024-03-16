@@ -10,7 +10,6 @@ const logger = require('./utils/logger');
 const userRouter = require('./controllers/userRouter');
 const authRouter = require('./controllers/authRouter');
 const mediaRouter = require('./controllers/mediaRouter');
-const bookmarkRouter = require('./controllers/bookmarkRouter');
 
 const middleware = require('./utils/middleware');
 
@@ -39,6 +38,5 @@ app.use(middleware.requestLogger);
 app.use(userRouter);
 app.use(authRouter);
 app.use(mediaRouter);
-app.use(bookmarkRouter);
 
 module.exports = app;

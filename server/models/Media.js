@@ -21,6 +21,12 @@ ThumbnailSchema.set('toJSON', {
 });
 
 const MediaSchema = new mongoose.Schema({
+  bookmarkedBy: [
+    {
+      ref: 'User',
+      type: mongoose.Schema.Types.ObjectId,
+    },
+  ],
   title: {
     type: String,
     required: true,

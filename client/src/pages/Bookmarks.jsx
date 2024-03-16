@@ -1,10 +1,8 @@
 import GeneralMedia from '../components/GeneralMedia';
 import { useLoaderData } from 'react-router-dom';
-import bookmarkService from '../services/bookmarkService';
 
 export async function loader() {
-  const data = await bookmarkService.getBookmarks();
-  return data;
+  return null;
 }
 
 export default function Bookmarks() {

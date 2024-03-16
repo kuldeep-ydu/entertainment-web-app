@@ -35,7 +35,7 @@ export default function UserMenu() {
       document.removeEventListener('mousedown', handleClick);
     };
   }, []);
-  console.log(menuHidden);
+
   return (
     <div className="relative mt-auto" ref={menuRef}>
       <button

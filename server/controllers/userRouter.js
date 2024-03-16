@@ -2,7 +2,9 @@ const userRouter = require('express').Router();
 const Multer = require('multer');
 const handleUpload = require('../utils/cloudinary');
 const User = require('../models/User');
+const Media = require('../models/Media');
 const bcrypt = require('bcryptjs');
+const middleware = require('../utils/middleware');
 
 const storage = new Multer.memoryStorage();
 const upload = Multer({
@@ -59,6 +61,48 @@ userRouter.post(
       console.log(error.message);
       return response.status(500).json({ message: error.message });
     }
+  },
+);
+
+userRouter.post(
+  '/api/user/bookmark-media',
+  middleware.verifyToken,
+  async (request, response) => {
+    const userId = request.user;
+    const { mediaId } = request.body;
+
+    const user = await User.findById(userId);
+    user.bookmarks = user.bookmarks.concat(mediaId);
+    await user.save();
+
+    const media = await Media.findById(mediaId);
+    media.bookmarkedBy = media.bookmarkedBy.concat(userId);
+    await media.save();
+
+    return response.json({ message: 'Media bookmarked successfully' });
+  },
+);
+
+userRouter.post(
+  '/api/user/unbookmark-media',
+  middleware.verifyToken,
+  async (request, response) => {
+    const userId = request.user;
+    const { mediaId } = request.body;
+
+    const user = await User.findById(userId);
+    user.bookmarks = user.bookmarks.filter((id) => id.toString() !== mediaId);
+    await user.save();
+
+    const media = await Media.findById(mediaId);
+    media.bookmarkedBy = media.bookmarkedBy.filter(
+      (id) => id.toString() !== userId,
+    );
+    await media.save();
+
+    return response.json({
+      message: 'Media unbookmarked successfully',
+    });
   },
 );
 

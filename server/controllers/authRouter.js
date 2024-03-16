@@ -14,7 +14,7 @@ authRouter.post('/api/auth/login', upload.none(), async (request, response) => {
       .json({ message: 'Email and password are required.' });
   }
 
-  const existingUser = await User.findOne({ email });
+  const existingUser = await User.findOne({ email }).populate('bookmarks');
 
   if (!existingUser) {
     return response.status(401).json({ message: 'User does not exist.' });
@@ -32,6 +32,7 @@ authRouter.post('/api/auth/login', upload.none(), async (request, response) => {
   return response.json({
     email: existingUser.email,
     avatar: existingUser.avatar,
+    bookmarks: existingUser.bookmarks,
   });
 });
 
@@ -43,11 +44,14 @@ authRouter.post(
       return response.sendStatus(204);
     }
 
-    const user = await User.findOne({ email: request.user.email });
+    const user = await User.findOne({ email: request.user.email }).populate(
+      'bookmarks',
+    );
 
     return response.json({
       email: user.email,
       avatar: user.avatar,
+      bookmarks: user.bookmarks,
     });
   },
 );

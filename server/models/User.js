@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  bookmarks: [
+    {
+      ref: 'Media',
+      type: mongoose.Schema.Types.ObjectId,
+    },
+  ],
 });
 
 userSchema.set('toJSON', {

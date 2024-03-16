@@ -20,55 +20,7 @@ export default function MediaCard({ media, priority }) {
           title={`${title} thumbnail`}
           priority={priority}
         />
-        {/* <picture className="row-start-1 col-start-1 -z-[1] rounded-lg overflow-hidden">
-          <source
-            srcSet={regular.medium + '.jpg'}
-            type="image/jpg"
-            media="(min-width: 640px)"
-          />
-          <source
-            srcSet={regular.medium + '.webp'}
-            type="image/webp"
-            media="(min-width: 640px)"
-          />
-          <source
-            srcSet={regular.medium + '.avif'}
-            type="image/avif"
-            media="(min-width: 640px)"
-          />
-          <source
-            srcSet={regular.medium + '.png'}
-            type="image/png"
-            media="(min-width: 640px)"
-          />
 
-          <source
-            srcSet={regular.large + '.jpg'}
-            type="image/jpg"
-            media="(min-width: 768px)"
-          />
-          <source
-            srcSet={regular.large + '.webp'}
-            type="image/webp"
-            media="(min-width: 768px)"
-          />
-          <source
-            srcSet={regular.large + '.avif'}
-            type="image/avif"
-            media="(min-width: 768px)"
-          />
-          <source
-            srcSet={regular.large + '.png'}
-            type="image/png"
-            media="(min-width: 768px)"
-          />
-
-          <source srcSet={regular.small + '.png'} type="image/png" />
-          <source srcSet={regular.small + '.avif'} type="image/avif" />
-          <source srcSet={regular.small + '.jpg'} type="image/jpg" />
-
-          <img src={regular.small + '.webp'} alt={`${title} thumbnail`} />
-        </picture> */}
         <div className="relative col-start-1 row-start-1 rounded-lg bg-black bg-opacity-50 opacity-0 transition focus-within:opacity-100 hover:opacity-100">
           <button className="absolute right-4 top-4 rounded-full bg-black bg-opacity-50 p-2 [&_*]:hover:fill-white">
             <svg
