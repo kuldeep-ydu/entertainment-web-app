@@ -1,15 +1,14 @@
-import { Navigate, Outlet, useSearchParams } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../context/userProvider';
 import Search from '../components/Search';
+import useMediaSearch from '../hooks/useMediaSearch';
 
 export default function HomeLayout() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchValue, setSearchValue] = useState(
-    searchParams.get('search') || '',
-  );
+  const { searchParams, setSearchParams, searchValue, setSearchValue, media } =
+    useMediaSearch();
   const { user } = useContext(UserContext);
 
   if (!user) {
@@ -27,11 +26,16 @@ export default function HomeLayout() {
       <main className="min-w-0">
         <SearchBar
           searchParams={searchParams}
+          searchValue={searchValue}
           setSearchValue={setSearchValue}
         />
 
         {searchValue ? (
-          <Search searchValue={searchValue} setSearchParams={setSearchParams} />
+          <Search
+            searchValue={searchValue}
+            setSearchParams={setSearchParams}
+            media={media}
+          />
         ) : (
           <Outlet />
         )}

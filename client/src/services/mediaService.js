@@ -20,6 +20,17 @@ const getTvSeries = async () => {
   return response.data;
 };
 
-const mediaService = { getTrending, getRecommended, getMovies, getTvSeries };
+const searchMedia = async (searchValue) => {
+  const response = await api.get(`/api/media?title=${searchValue}`);
+  return response.data;
+};
+
+const mediaService = {
+  getTrending,
+  getRecommended,
+  getMovies,
+  getTvSeries,
+  searchMedia,
+};
 
 export default mediaService;

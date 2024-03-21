@@ -9,6 +9,7 @@ import IconSearch from './icon-search.svg?react';
 import IconPlay from './icon-play.svg?react';
 import Logo from './logo.svg';
 import ImageAvatar from './image-avatar.png';
+import ThumbnailLoader from './thumbnail-loader.svg';
 
 export {
   IconBookmarkFull,
@@ -22,4 +23,5 @@ export {
   IconPlay,
   Logo,
   ImageAvatar,
+  ThumbnailLoader,
 };

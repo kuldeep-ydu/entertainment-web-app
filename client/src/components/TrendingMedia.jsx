@@ -28,9 +28,9 @@ export default function TrendingMedia({ trendingMedia }) {
           },
         }}
       >
-        {trendingMedia.map((media) => (
+        {trendingMedia.map((media, index) => (
           <SwiperSlide key={media.title}>
-            <TrendingMediaCard media={media} />
+            <TrendingMediaCard media={media} priority={index < 3} />
           </SwiperSlide>
         ))}
       </Swiper>

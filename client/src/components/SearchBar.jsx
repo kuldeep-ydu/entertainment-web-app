@@ -10,7 +10,7 @@ export default function SearchBar({ searchValue, setSearchValue }) {
 
       <input
         onChange={({ target }) => setSearchValue(target.value)}
-        value={searchValue}
+        value={searchValue || ''}
         id="search-bar"
         type="text"
         placeholder="Search for movies or TV series"
