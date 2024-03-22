@@ -10,6 +10,7 @@ import IconPlay from './icon-play.svg?react';
 import Logo from './logo.svg';
 import ImageAvatar from './image-avatar.png';
 import ThumbnailLoader from './thumbnail-loader.svg';
+import NotFoundSvg from './404-illustration.svg';
 
 export {
   IconBookmarkFull,
@@ -24,4 +25,5 @@ export {
   Logo,
   ImageAvatar,
   ThumbnailLoader,
+  NotFoundSvg,
 };

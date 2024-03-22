@@ -11,8 +11,6 @@ export default function MediaCard({ media, priority }) {
     user.bookmarks.includes(media.id),
   );
 
-  console.log(user.bookmarks);
-
   const {
     id,
     title,
@@ -24,43 +22,43 @@ export default function MediaCard({ media, priority }) {
 
   async function addBookmark() {
     try {
+      setBookmarkStatus(true);
       setUser((user) => {
-        user.bookmarks = user.bookmarks.concat(media);
+        user.bookmarks = user.bookmarks.concat(id);
         return user;
       });
 
       toast.success('Bookmarked!');
-      setBookmarkStatus(true);
       await userService.bookmarkMedia({ mediaId: id });
     } catch (error) {
       toast.error('Something went wrong!');
+      setBookmarkStatus(false);
 
       setUser((user) => {
-        user.bookmarks = user.bookmarks.filter((media) => media.id !== id);
+        user.bookmarks = user.bookmarks.filter((mediaId) => mediaId !== id);
         return user;
       });
-      setBookmarkStatus(false);
     }
   }
 
   async function removeBookmark() {
     try {
+      setBookmarkStatus(false);
       setUser((user) => {
-        user.bookmarks = user.bookmarks.filter((media) => media.id !== id);
+        user.bookmarks = user.bookmarks.filter((mediaId) => mediaId !== id);
         return user;
       });
-      setBookmarkStatus(false);
 
       toast.success('Unbookmarked!');
       await userService.unBookmarkMedia({ mediaId: id });
     } catch (error) {
       toast.error('Something went wrong!');
+      setBookmarkStatus(true);
 
       setUser((user) => {
         user.bookmarks = user.bookmarks.concat(media);
         return user;
       });
-      setBookmarkStatus(true);
     }
   }
 

@@ -10,6 +10,7 @@ export default function TrendingMediaCard({ media, priority }) {
   const [bookmarkStatus, setBookmarkStatus] = useState(
     user.bookmarks.includes(media.id),
   );
+
   const {
     id,
     title,
@@ -21,43 +22,46 @@ export default function TrendingMediaCard({ media, priority }) {
 
   async function addBookmark() {
     try {
+      setBookmarkStatus(true);
       setUser((user) => {
-        user.bookmarks = user.bookmarks.concat(media);
+        user.bookmarks = user.bookmarks.concat(id);
+        console.log(user.bookmarks);
+        console.log(user.bookmarks.includes(id));
         return user;
       });
 
       toast.success('Bookmarked!');
-      setBookmarkStatus(true);
       await userService.bookmarkMedia({ mediaId: id });
     } catch (error) {
       toast.error('Something went wrong!');
+      setBookmarkStatus(false);
 
       setUser((user) => {
-        user.bookmarks = user.bookmarks.filter((media) => media.id !== id);
+        user.bookmarks = user.bookmarks.filter((mediaId) => mediaId !== id);
         return user;
       });
-      setBookmarkStatus(false);
     }
   }
 
   async function removeBookmark() {
     try {
+      setBookmarkStatus(false);
       setUser((user) => {
-        user.bookmarks = user.bookmarks.filter((media) => media.id !== id);
+        user.bookmarks = user.bookmarks.filter((mediaId) => mediaId !== id);
+        console.log(user.bookmarks);
         return user;
       });
-      setBookmarkStatus(false);
 
       toast.success('Unbookmarked!');
       await userService.unBookmarkMedia({ mediaId: id });
     } catch (error) {
       toast.error('Something went wrong!');
+      setBookmarkStatus(true);
 
       setUser((user) => {
         user.bookmarks = user.bookmarks.concat(media);
         return user;
       });
-      setBookmarkStatus(true);
     }
   }
 
