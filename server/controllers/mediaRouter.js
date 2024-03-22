@@ -1,5 +1,6 @@
 const mediaRouter = require('express').Router();
 const Media = require('../models/Media');
+const middleware = require('../utils/middleware');
 
 mediaRouter.get('/api/media', async (request, response) => {
   const { title } = request.query;
@@ -29,5 +30,19 @@ mediaRouter.get('/api/media/tv-series', async (_, response) => {
   const tvSeries = await Media.find({ category: 'TV Series' });
   return response.json(tvSeries);
 });
+
+mediaRouter.get(
+  '/api/media/bookmarked',
+  middleware.verifyToken,
+  async (request, response) => {
+    const user = request.user;
+
+    const bookmarkedMedia = await Media.find({
+      bookmarkedBy: { $in: [user._id] },
+    });
+
+    return response.json(bookmarkedMedia);
+  },
+);
 
 module.exports = mediaRouter;

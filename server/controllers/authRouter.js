@@ -46,7 +46,10 @@ authRouter.post(
 
     const user = await User.findOne({ email: request.user.email }).populate(
       'bookmarks',
+      'id',
     );
+
+    user.bookmarks = user.bookmarks.map((bookmark) => bookmark.id);
 
     return response.json({
       email: user.email,

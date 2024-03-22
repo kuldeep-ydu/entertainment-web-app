@@ -25,12 +25,18 @@ const searchMedia = async (searchValue) => {
   return response.data;
 };
 
+const bookmarkedMedia = async () => {
+  const response = await api.get('/api/media/bookmarked');
+  return response.data;
+};
+
 const mediaService = {
   getTrending,
   getRecommended,
   getMovies,
   getTvSeries,
   searchMedia,
+  bookmarkedMedia,
 };
 
 export default mediaService;

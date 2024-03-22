@@ -68,15 +68,13 @@ userRouter.post(
   '/api/user/bookmark-media',
   middleware.verifyToken,
   async (request, response) => {
-    const userId = request.user;
+    const user = request.user;
     const { mediaId } = request.body;
-
-    const user = await User.findById(userId);
     user.bookmarks = user.bookmarks.concat(mediaId);
     await user.save();
 
     const media = await Media.findById(mediaId);
-    media.bookmarkedBy = media.bookmarkedBy.concat(userId);
+    media.bookmarkedBy = media.bookmarkedBy.concat(user._id);
     await media.save();
 
     return response.json({ message: 'Media bookmarked successfully' });
@@ -87,17 +85,17 @@ userRouter.post(
   '/api/user/unbookmark-media',
   middleware.verifyToken,
   async (request, response) => {
-    const userId = request.user;
+    const user = request.user;
     const { mediaId } = request.body;
 
-    const user = await User.findById(userId);
     user.bookmarks = user.bookmarks.filter((id) => id.toString() !== mediaId);
     await user.save();
 
     const media = await Media.findById(mediaId);
     media.bookmarkedBy = media.bookmarkedBy.filter(
-      (id) => id.toString() !== userId,
+      (id) => id.toString() !== user._id.toString(),
     );
+
     await media.save();
 
     return response.json({

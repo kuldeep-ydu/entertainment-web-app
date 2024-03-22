@@ -1,15 +1,68 @@
+import { useContext, useState } from 'react';
 import { IconCategoryMovie, IconCategoryTv, IconPlay } from '../assets';
+import { UserContext } from '../context/userProvider';
 import Image from './Image';
+import { toast } from 'react-hot-toast';
+import userService from '../services/userService';
 
 export default function MediaCard({ media, priority }) {
+  const { user, setUser } = useContext(UserContext);
+  const [bookmarkStatus, setBookmarkStatus] = useState(
+    user.bookmarks.includes(media.id),
+  );
+
+  console.log(user.bookmarks);
+
   const {
+    id,
     title,
     year,
     rating,
     category,
     thumbnail: { regular },
-    isBookmarked,
   } = media;
+
+  async function addBookmark() {
+    try {
+      setUser((user) => {
+        user.bookmarks = user.bookmarks.concat(media);
+        return user;
+      });
+
+      toast.success('Bookmarked!');
+      setBookmarkStatus(true);
+      await userService.bookmarkMedia({ mediaId: id });
+    } catch (error) {
+      toast.error('Something went wrong!');
+
+      setUser((user) => {
+        user.bookmarks = user.bookmarks.filter((media) => media.id !== id);
+        return user;
+      });
+      setBookmarkStatus(false);
+    }
+  }
+
+  async function removeBookmark() {
+    try {
+      setUser((user) => {
+        user.bookmarks = user.bookmarks.filter((media) => media.id !== id);
+        return user;
+      });
+      setBookmarkStatus(false);
+
+      toast.success('Unbookmarked!');
+      await userService.unBookmarkMedia({ mediaId: id });
+    } catch (error) {
+      toast.error('Something went wrong!');
+
+      setUser((user) => {
+        user.bookmarks = user.bookmarks.concat(media);
+        return user;
+      });
+      setBookmarkStatus(true);
+    }
+  }
 
   return (
     <li>
@@ -22,12 +75,15 @@ export default function MediaCard({ media, priority }) {
         />
 
         <div className="relative col-start-1 row-start-1 rounded-lg bg-black bg-opacity-50 opacity-0 transition focus-within:opacity-100 hover:opacity-100">
-          <button className="absolute right-4 top-4 rounded-full bg-black bg-opacity-50 p-2 [&_*]:hover:fill-white">
+          <button
+            onClick={bookmarkStatus ? removeBookmark : addBookmark}
+            className="absolute right-4 top-4 rounded-full bg-black bg-opacity-50 p-2"
+          >
             <svg
               width="12"
               height="14"
               xmlns="http://www.w3.org/2000/svg"
-              className={`stroke-white stroke-[1.5] *:transition ${isBookmarked ? 'fill-white' : 'fill-transparent'}`}
+              className={`stroke-white stroke-[1.5] *:transition ${bookmarkStatus ? 'fill-white' : 'fill-transparent'}`}
             >
               <path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" />
             </svg>
