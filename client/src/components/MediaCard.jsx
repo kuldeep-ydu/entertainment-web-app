@@ -50,11 +50,11 @@ export default function MediaCard({ media, priority, variant = 'regular' }) {
       setBookmarkStatus(true);
 
       setUser((user) => {
-        user.bookmarks = user.bookmarks.concat(media);
+        user.bookmarks = user.bookmarks.concat(id);
         return user;
       });
     }
-  }, [id, media, setUser]);
+  }, [id, setUser]);
 
   return (
     <li>

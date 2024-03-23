@@ -2,8 +2,8 @@ import api from './api';
 
 const baseURL = '/api/media';
 
-const getOne = async () => {
-  const response = await api.get(`${baseURL}/:mediaId`);
+const getOne = async (id) => {
+  const response = await api.get(`${baseURL}/play/${id}`);
   return response.data;
 };
 

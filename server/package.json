@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon --inspect index.js",
     "build:ui": "rm -rf dist && cd ../client && npm run build && cp -r dist ../server",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",

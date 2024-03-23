@@ -61,10 +61,12 @@ export default function Login() {
     return () => toast.dismiss(id);
   }, []);
 
-  if (userData) {
-    setUser(userData);
-    navigate('/');
-  }
+  useEffect(() => {
+    if (userData) {
+      setUser(userData);
+      navigate('/');
+    }
+  }, [navigate, setUser, userData]);
 
   const body = (
     <>

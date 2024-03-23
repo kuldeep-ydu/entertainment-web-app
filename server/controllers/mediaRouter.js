@@ -1,10 +1,13 @@
 const mediaRouter = require('express').Router();
 const Media = require('../models/Media');
 const middleware = require('../utils/middleware');
+const mongoose = require('mongoose');
 
-mediaRouter.get('/api/media', async (request, response) => {
+mediaRouter.get('/api/media/play/:movieId', async (request, response) => {
   const { movieId } = request.params;
-  const media = await Media.findOne({ id: movieId });
+  const media = await Media.findOne({
+    _id: new mongoose.Types.ObjectId(movieId),
+  });
   return response.status(200).json(media);
 });
 

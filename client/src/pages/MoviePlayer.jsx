@@ -10,7 +10,7 @@ export default function MoviePlayer() {
   const media = useLoaderData();
 
   return (
-    <div className="grid place-items-center bg-primary p-10">
+    <div className="grid place-items-center bg-primary p-10 pb-0">
       <h1 className="text-4xl mb-10">
         Watch{' '}
         <span className="font-bold">
@@ -19,7 +19,8 @@ export default function MoviePlayer() {
       </h1>
       <video
         controls
-        className="block aspect-video max-w-full w-[500px]"
+        poster={media.thumbnail.regular.large + '.png'}
+        className="block aspect-video max-w-full w-[1000px]"
         src={media.url}
       />
     </div>
