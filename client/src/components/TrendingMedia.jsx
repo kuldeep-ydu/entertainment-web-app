@@ -1,7 +1,7 @@
 import Heading from './Heading';
-import TrendingMediaCard from './TrendingMediaCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import MediaCard from './MediaCard';
 
 export default function TrendingMedia({ trendingMedia }) {
   return (
@@ -30,7 +30,7 @@ export default function TrendingMedia({ trendingMedia }) {
       >
         {trendingMedia.map((media, index) => (
           <SwiperSlide key={media.title}>
-            <TrendingMediaCard media={media} priority={index < 3} />
+            <MediaCard media={media} priority={index < 3} variant="trending" />
           </SwiperSlide>
         ))}
       </Swiper>

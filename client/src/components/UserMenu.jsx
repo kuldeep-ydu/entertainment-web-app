@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../context/userProvider';
 import { toast } from 'react-hot-toast';
 import authService from '../services/authService';
@@ -10,7 +10,7 @@ export default function UserMenu() {
   const { setUser } = useContext(UserContext);
   const [loaded, setLoaded] = useState(false);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     const toastId = toast.loading('Logging out ...');
 
     try {
@@ -22,7 +22,7 @@ export default function UserMenu() {
       toast.dismiss(toastId);
       toast.error(error.message);
     }
-  };
+  }, [setUser]);
 
   useEffect(() => {
     function handleClick(event) {

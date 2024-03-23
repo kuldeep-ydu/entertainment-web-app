@@ -1,14 +1,26 @@
-export async function loader() {
-  return null;
+import MediaService from '../services/mediaService';
+import { useLoaderData } from 'react-router-dom';
+
+export async function loader({ params }) {
+  const media = await MediaService.getOne(params.movieId);
+  return media;
 }
 
 export default function MoviePlayer() {
+  const media = useLoaderData();
+
   return (
     <div className="grid place-items-center bg-primary p-10">
+      <h1 className="text-4xl mb-10">
+        Watch{' '}
+        <span className="font-bold">
+          {media.title} ({media.year})
+        </span>
+      </h1>
       <video
         controls
         className="block aspect-video max-w-full w-[500px]"
-        src="https://res.cloudinary.com/dyo9kvck4/video/upload/v1711195590/EntertainmentWebApp/videos/movie_hxe5zh.mp4"
+        src={media.url}
       />
     </div>
   );

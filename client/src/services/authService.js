@@ -1,17 +1,19 @@
 import api from './api';
 
+const baseURL = '/api/auth';
+
 const login = async (credentials) => {
-  const response = await api.post('/api/auth/login', credentials);
+  const response = await api.post(`${baseURL}/login`, credentials);
   return response.data;
 };
 
 const checkAuthentication = async () => {
-  const response = await api.post('/api/auth/is-authenticated');
+  const response = await api.post(`${baseURL}/is-authenticated`);
   return response.data;
 };
 
 const logout = async () => {
-  await api.get('/api/auth/logout');
+  await api.get(`${baseURL}/logout`);
 };
 
 const authService = { login, checkAuthentication, logout };

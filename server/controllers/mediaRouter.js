@@ -3,6 +3,12 @@ const Media = require('../models/Media');
 const middleware = require('../utils/middleware');
 
 mediaRouter.get('/api/media', async (request, response) => {
+  const { id } = request.query;
+  const media = await Media.findOne({ id });
+  return response.status(200).json(media);
+});
+
+mediaRouter.get('/api/media/search', async (request, response) => {
   const { title } = request.query;
   const results = await Media.find({ title: { $regex: title, $options: 'i' } });
   return response.status(200).json(results);

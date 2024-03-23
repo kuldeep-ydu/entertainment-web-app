@@ -1,36 +1,44 @@
 import api from './api';
 
+const baseURL = '/api/media';
+
+const getOne = async () => {
+  const response = await api.get(baseURL);
+  return response.data;
+};
+
 const getTrending = async () => {
-  const response = await api.get('/api/media/trending');
+  const response = await api.get(`${baseURL}/trending`);
   return response.data;
 };
 
 const getRecommended = async () => {
-  const response = await api.get('/api/media/recommended');
+  const response = await api.get(`${baseURL}/recommended`);
   return response.data;
 };
 
 const getMovies = async () => {
-  const response = await api.get('/api/media/movies');
+  const response = await api.get(`${baseURL}/movies`);
   return response.data;
 };
 
 const getTvSeries = async () => {
-  const response = await api.get('/api/media/tv-series');
+  const response = await api.get(`${baseURL}/tv-series`);
   return response.data;
 };
 
 const searchMedia = async (searchValue) => {
-  const response = await api.get(`/api/media?title=${searchValue}`);
+  const response = await api.get(`${baseURL}/search?title=${searchValue}`);
   return response.data;
 };
 
 const bookmarkedMedia = async () => {
-  const response = await api.get('/api/media/bookmarked');
+  const response = await api.get(`${baseURL}/bookmarked`);
   return response.data;
 };
 
 const mediaService = {
+  getOne,
   getTrending,
   getRecommended,
   getMovies,
