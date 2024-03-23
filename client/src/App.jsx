@@ -16,6 +16,7 @@ import Home, { loader as homeLoader } from './pages/Home';
 import Movies, { loader as moviesLoader } from './pages/Movies';
 import TvSeries, { loader as tvSeriesLoader } from './pages/TvSeries';
 import Bookmarks, { loader as bookmarksLoader } from './pages/Bookmarks';
+import MoviePlayer, { loader as movieLoader } from './pages/MoviePlayer';
 
 import UserProvider from './context/userProvider';
 import NotFound from './pages/NotFound';
@@ -38,6 +39,11 @@ const router = createBrowserRouter(
           path="bookmarks"
           element={<Bookmarks />}
           loader={bookmarksLoader}
+        />
+        <Route
+          path="playing/:movieId"
+          element={<MoviePlayer />}
+          loader={movieLoader}
         />
       </Route>
 

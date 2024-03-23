@@ -4,6 +4,7 @@ import userService from '../services/userService';
 import Image from './Image';
 import { UserContext } from '../context/userProvider';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 export default function TrendingMediaCard({ media, priority }) {
   const { user, setUser } = useContext(UserContext);
@@ -90,10 +91,13 @@ export default function TrendingMediaCard({ media, priority }) {
             <path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" />
           </svg>
         </button>
-        <button className="play-button absolute left-[50%] top-[50%] hidden -translate-x-2/4 -translate-y-2/4 items-center gap-5 rounded-full bg-white bg-opacity-25 p-[6px] pr-5 text-base font-normal opacity-0 transition hover:scale-[1.1] focus-visible:scale-[1.1] sm:flex sm:text-lg">
+        <Link
+          to={`playing/${id}`}
+          className="play-button absolute left-[50%] top-[50%] hidden -translate-x-2/4 -translate-y-2/4 items-center gap-5 rounded-full bg-white bg-opacity-25 p-[6px] pr-5 text-base font-normal opacity-0 transition hover:scale-[1.1] focus-visible:scale-[1.1] sm:flex sm:text-lg"
+        >
           <IconPlay height="30" width="30" />
           Play
-        </button>
+        </Link>
 
         <div className="col-start-1 row-start-1 grid h-full content-end p-6">
           <p className="my-2 flex items-center gap-2 text-xs tracking-wide opacity-75 sm:text-base">

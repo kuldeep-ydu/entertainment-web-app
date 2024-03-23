@@ -23,7 +23,7 @@ export default function HomeLayout() {
     <div className="grid pb-8 content-start md:grid-cols-[auto_1fr]">
       <Navbar />
 
-      <main className="min-w-0">
+      <main className="min-w-0 relative">
         <SearchBar
           searchParams={searchParams}
           searchValue={searchValue}

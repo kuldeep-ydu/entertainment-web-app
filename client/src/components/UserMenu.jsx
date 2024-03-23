@@ -44,7 +44,7 @@ export default function UserMenu() {
         aria-controls="user-menu"
         aria-expanded={!menuHidden}
         onClick={() => setMenuHidden((prev) => !prev)}
-        className={`aspect-square overflow-hidden rounded-full border relative before:absolute before:inset-0 before:bg-secondary-dark before:z-50 before:transition before:${loaded ? 'opacity-0' : 'opacity-100'} transition ${menuHidden ? 'border-white' : 'border-accent'} hover:border-accent focus:border-accent`}
+        className={`aspect-square overflow-hidden rounded-full border relative before:absolute before:inset-0 before:bg-secondary-dark before:z-50 before:transition before:${loaded ? 'opacity-0' : 'opacity-100'} transition ${menuHidden ? 'border-white' : 'border-accent'} hover:border-accent focus-visible:border-accent outline-0`}
       >
         <img
           className="h-full object-cover"
@@ -64,8 +64,9 @@ export default function UserMenu() {
       >
         <li>
           <button
+            tabIndex={menuHidden ? -1 : 0}
             onClick={logout}
-            className="w-full rounded-[4px] py-2 transition hover:bg-primary focus-visible:bg-primary"
+            className={`${menuHidden ? 'pointer-events-none' : ''} w-full rounded-[4px] py-2 transition hover:bg-primary focus-visible:bg-primary`}
           >
             Log out
           </button>
