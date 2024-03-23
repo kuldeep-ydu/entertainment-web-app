@@ -3,7 +3,7 @@ import api from './api';
 const baseURL = '/api/media';
 
 const getOne = async () => {
-  const response = await api.get(baseURL);
+  const response = await api.get(`${baseURL}/:mediaId`);
   return response.data;
 };
 

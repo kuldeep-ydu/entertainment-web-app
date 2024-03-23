@@ -3,8 +3,8 @@ const Media = require('../models/Media');
 const middleware = require('../utils/middleware');
 
 mediaRouter.get('/api/media', async (request, response) => {
-  const { id } = request.query;
-  const media = await Media.findOne({ id });
+  const { movieId } = request.params;
+  const media = await Media.findOne({ id: movieId });
   return response.status(200).json(media);
 });
 
