@@ -86,9 +86,9 @@ export default function MediaCard({ media, priority }) {
               <path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" />
             </svg>
           </button>
-          <button className="text-md absolute left-[50%] top-[50%] flex -translate-x-2/4 -translate-y-2/4 items-center gap-5 rounded-full bg-white bg-opacity-25 p-[6px] pr-5 font-normal transition hover:scale-[1.1] focus-visible:scale-[1.1]">
+          <button className="text-md absolute left-[50%] top-[50%] flex -translate-x-2/4 -translate-y-2/4 items-center gap-5 rounded-full bg-white bg-opacity-25 p-[6px] xs:pr-5 font-normal transition hover:scale-[1.1] focus-visible:scale-[1.1]">
             <IconPlay height="30" width="30" />
-            Play
+            <span className="hidden xs:flex">Play</span>
           </button>
         </div>
         <p className="my-2 flex items-center gap-2 text-[13px] tracking-wide opacity-75">

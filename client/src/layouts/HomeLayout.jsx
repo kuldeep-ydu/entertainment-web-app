@@ -20,7 +20,7 @@ export default function HomeLayout() {
   }
 
   return (
-    <div className="grid pb-8 md:grid-cols-[auto_1fr]">
+    <div className="grid pb-8 content-start md:grid-cols-[auto_1fr]">
       <Navbar />
 
       <main className="min-w-0">
