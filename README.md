@@ -36,8 +36,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://your-solution-url.com](https://your-solution-url.com)
-- Live Site URL: [https://entertainment-web-app-jet.vercel.app/](https://entertainment-web-app-jet.vercel.app/)
+- [Solution URL](https://www.frontendmentor.io/solutions/entertainment-web-app-mern-and-tailwindcss-NtpXwPkwSn)
+- [Live Site URL](https://entertainment-web-app-jet.vercel.app/)
 
 ## My process
 
