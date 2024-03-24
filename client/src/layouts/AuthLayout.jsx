@@ -7,12 +7,8 @@ export default function AuthLayout() {
   const { user } = useContext(UserContext);
 
   return !user ? (
-    <div className="grid place-items-center p-3">
-      <img
-        src={logo}
-        alt="app logo"
-        className="absolute top-12 block max-w-full"
-      />
+    <div className="grid place-items-center content-center gap-16 p-3">
+      <img src={logo} alt="app logo" className="block max-w-full" />
       <Outlet />
     </div>
   ) : (
