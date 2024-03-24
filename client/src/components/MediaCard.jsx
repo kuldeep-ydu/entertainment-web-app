@@ -83,7 +83,7 @@ export default function MediaCard({ media, priority, variant = 'regular' }) {
             label={bookmarkStatus ? 'remove bookmark' : 'add bookmark'}
           />
           <Link
-            to={`playing/${id}`}
+            to={`/playing/${id}`}
             className={`${variant === 'regular' ? 'text-md flex xs:pr-5' : 'text-base hidden pr-5 opacity-0 sm:flex sm:text-lg'} play-button absolute left-[50%] top-[50%] -translate-x-2/4 -translate-y-2/4 items-center gap-5 rounded-full bg-white bg-opacity-25 p-[6px] font-normal transition hover:scale-[1.1] focus-visible:scale-[1.1]`}
           >
             <IconPlay height="30" width="30" />
