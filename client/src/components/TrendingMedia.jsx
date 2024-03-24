@@ -21,9 +21,12 @@ export default function TrendingMedia({ trendingMedia }) {
             slidesPerView: 1.5,
           },
           500: {
-            slidesPerView: 1.8,
+            slidesPerView: 2,
           },
           640: {
+            slidesPerView: 1.4,
+          },
+          1000: {
             slidesPerView: 2.3,
           },
         }}
