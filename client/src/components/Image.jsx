@@ -5,7 +5,7 @@ export default function Image({ className, data, title, priority, trending }) {
 
   return (
     <picture
-      className={`${className} ${loaded ? '' : 'aspect-[20/9]'} relative before:absolute before:inset-0 before:rounded-lg before:bg-secondary-dark before:z-50 before:transition before:${loaded ? 'opacity-0' : 'opacity-100'}`}
+      className={`${className} relative before:absolute before:inset-0 before:rounded-lg before:bg-secondary-dark before:z-50 before:transition before:${loaded ? 'opacity-0' : 'opacity-100'}`}
     >
       <source
         srcSet={`${data.large}.jpg`}
