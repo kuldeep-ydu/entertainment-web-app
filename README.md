@@ -179,10 +179,6 @@ I would love to integrate a movie api to give the app a more real feel. I would 
 
 - [React Debounce Search Input API Call | useDebounce React Hook ](https://www.youtube.com/watch?v=MHm-2YmWEek) - This helped me learn the concept of debouncing and fetching search results efficiently.
 
-## Author
-
-- Frontend Mentor - [@husnain214](https://www.frontendmentor.io/profile/husnain214)
-- LinkedIn - [@husnainzahid214](https://www.linkedin.com/in/husnainzahid/)
 
 ## Acknowledgments
 
